@@ -3,19 +3,32 @@
 
 import unittest, wochentagsberechnung
 
-test "24.02.2023":
-  check main(@["24.02.2023"]) == @["Der 24.2.2023 ist ein Freitag"]
-  check main(@["24.2.2023"]) == @["Der 24.2.2023 ist ein Freitag"]
+test "Keine Argumente":
+  const result = "Unpassende Anzahl an Argumenten übergeben"
+  check main(@[]) == @[result]
 
-test "01.01.1000":
-  check main(@["01.01.1000"]) == @["Der 1.1.1000 war ein Mittwoch"]
-  check main(@["1.1.1000"]) == @["Der 1.1.1000 war ein Mittwoch"]
+test "Zu viele Argumente":
+  const result = "Unpassende Anzahl an Argumenten übergeben"
+  check main(@["", "", ""]) == @[result]
+  check main(@["", ""]) == @[result]
 
-test "01.01.1900":
-  check main(@["01.01.1900"]) == @["Der 1.1.1900 war ein Montag"]
-  check main(@["1.1.1900"]) == @["Der 1.1.1900 war ein Montag"]
+test "Ungültiges Datum":
+  const result = "Ungültiges Datum angegeben"
+  check main(@[""]) == @[result]
 
-test "01.01.2000":
-  check main(@["01.01.2000"]) == @["Der 1.1.2000 war ein Samstag"]
-  check main(@["1.1.2000"]) == @["Der 1.1.2000 war ein Samstag"]
+test "Ungültiger Tag":
+  const result = "Ungültiger Tag angegeben"
+  check main(@["32.01.2000"]) == @[result]
+  check main(@["32.1.2000"]) == @[result]
 
+test "Ungültiger Monat":
+  const result = "Ungültiger Monat angegeben"
+  check main(@["01.13.2000"]) == @[result]
+  check main(@["1.13.2000"]) == @[result]
+
+test "Ungültiges Jahr":
+  const result = "Ungültiges Jahr angegeben"
+  check main(@["01.01.1000"]) == @[result]
+  check main(@["1.1.1000"]) == @[result]
+  check main(@["01.02.1000"]) == @[result]
+  check main(@["1.2.1000"]) == @[result]
