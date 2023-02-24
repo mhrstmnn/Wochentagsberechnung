@@ -2,7 +2,7 @@
 
 import std/[os, strutils, strformat, times]
 
-proc main(arguments = commandLineParams()): seq[string] =
+proc main*(arguments = commandLineParams()): seq[string] =
   if arguments.len != 1:
     result.add("Unpassende Anzahl an Argumenten übergeben")
     return
