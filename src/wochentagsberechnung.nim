@@ -36,9 +36,12 @@ proc main*(arguments = commandLineParams()): seq[string] =
   if result.len == 0:
     let date = parse(fmt"{day}-{month}-{year}", "d-M-yyyy")
     var resultMessage = "Der " & date.format("dd-MM-yyyy").replace('-', '.') & " "
-    if date < now(): resultMessage &= "war"
+    if year(date) == year(now()) and
+        month(date) == month(now()) and
+        monthday(date) == monthday(now()):
+      resultMessage &= "ist"
+    elif date < now(): resultMessage &= "war"
     elif date > now(): resultMessage &= "wird"
-    else: resultMessage &= "ist"
     resultMessage &= " ein "
     if januaryOrFebruary: values[2] = intToStr(parseInt(values[2]) - 1)
     let
@@ -53,7 +56,7 @@ proc main*(arguments = commandLineParams()): seq[string] =
     of 4: resultMessage &= "Donnerstag"
     of 5: resultMessage &= "Freitag"
     of 6: resultMessage &= "Samstag"
-    else: discard
+    else: resultMessage = "Es konnte kein Wochentag ermittelt werden"
     result.add(resultMessage)
 
 let output = main()
