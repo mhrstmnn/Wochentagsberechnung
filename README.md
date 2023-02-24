@@ -15,7 +15,7 @@ nimble install
 Run package (replace date):
 
 ```shell
-wochentagsberechnung 24.02.2022
+wochentagsberechnung 24.02.2023
 ```
 
 ## Contribute
