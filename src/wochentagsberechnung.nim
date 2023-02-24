@@ -30,17 +30,17 @@ proc main*(arguments = commandLineParams()): seq[string] =
   else: m = month - 2
 
   let year = parseInt(values[2])
-  if year < 1000 or year > 9999: result.add("Ungültiges Jahr angegeben")
+  if (year < 1000 or year > 9999) or (year == 1000 and januaryOrFebruary):
+    result.add("Ungültiges Jahr angegeben")
 
   if result.len == 0:
     let date = parse(fmt"{day}-{month}-{year}", "d-M-yyyy")
-    var resultMessage = fmt"Der {day}.{month}.{year} "
+    var resultMessage = "Der " & date.format("dd-MM-yyyy").replace('-', '.') & " "
     if date < now(): resultMessage &= "war"
     elif date > now(): resultMessage &= "wird"
     else: resultMessage &= "ist"
     resultMessage &= " ein "
-    if januaryOrFebruary:
-      values[2] = values[2][0..2] & intToStr(parseInt($values[2][3]) - 1)
+    if januaryOrFebruary: values[2] = intToStr(parseInt(values[2]) - 1)
     let
       y = parseInt(values[2][2..3])
       c = parseInt(values[2][0..1])
