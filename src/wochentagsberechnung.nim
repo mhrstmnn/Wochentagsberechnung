@@ -15,11 +15,11 @@ proc main(arguments = commandLineParams()): seq[string] =
   let day = parseInt(values[0])
   if day < 1 or day > 31: result.add("Ungültiger Tag angegeben")
 
+  let month = parseInt(values[1])
+  if month < 1 or month > 12: result.add("Ungültiger Monat angegeben")
   var
-    month = parseInt(values[1])
     m: int
     januaryOrFebruary = false
-  if month < 1 or month > 12: result.add("Ungültiger Monat angegeben")
   case month
   of 1:
     m = 11
@@ -33,19 +33,18 @@ proc main(arguments = commandLineParams()): seq[string] =
   if year < 1000 or year > 9999: result.add("Ungültiges Jahr angegeben")
 
   if result.len == 0:
+    let date = parse(fmt"{day}-{month}-{year}", "d-M-yyyy")
+    var resultMessage = fmt"Der {day}.{month}.{year} "
+    if date < now(): resultMessage &= "war"
+    elif date > now(): resultMessage &= "wird"
+    else: resultMessage &= "ist"
+    resultMessage &= " ein "
     if januaryOrFebruary:
       values[2] = values[2][0..2] & intToStr(parseInt($values[2][3]) - 1)
     let
       y = parseInt(values[2][2..3])
       c = parseInt(values[2][0..1])
       w = (day + int(2.6 * float(m) - 0.2) + y + int(y / 4) + int(c / 4) - 2 * c) mod 7
-
-    var resultMessage = fmt"Der {day}.{month}.{year} "
-    let date = parse(fmt"{day}-{month}-{year}", "d-M-yyyy")
-    if date < now(): resultMessage &= "war"
-    elif date > now(): resultMessage &= "wird"
-    else: resultMessage &= "ist"
-    resultMessage &= " ein "
     case w
     of 0: resultMessage &= "Sonntag"
     of 1: resultMessage &= "Montag"
