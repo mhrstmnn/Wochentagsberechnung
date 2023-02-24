@@ -2,7 +2,7 @@
 
 version       = "0.1.0"
 author        = "Michael Horstmann"
-description   = "A new awesome nimble package"
+description   = "Zu einem beliebigen Datum in der Vergangenheit oder Zukunft den Wochentag bestimmen"
 license       = "MIT"
 srcDir        = "src"
 binDir        = "bin"
