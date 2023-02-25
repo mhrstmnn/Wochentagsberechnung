@@ -2,7 +2,7 @@
 
 version       = "1.0.1"
 author        = "Michael Horstmann"
-description   = "Zu einem beliebigen Datum den Wochentag bestimmen"
+description   = "Zu einem beliebigen Datum den Wochentag ermitteln"
 license       = "MIT"
 srcDir        = "src"
 binDir        = "bin"

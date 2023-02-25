@@ -47,12 +47,11 @@ proc parseDate*(arguments = commandLineParams()): string =
   if month < 1 or month > 12: return "Ungültiger Monat angegeben"
   if (year < 1000 or year > 9999) or (year == 1000 and januaryOrFebruary):
     return "Ungültiges Jahr angegeben"
-  if januaryOrFebruary: values[2] = intToStr(parseInt(values[2]) - 1)
 
   var m: int
-  case month
-  of 1: m = 11
-  of 2: m = 12
+  if januaryOrFebruary:
+    m = month + 10
+    values[2] = intToStr(parseInt(values[2]) - 1)
   else: m = month - 2
 
   let
