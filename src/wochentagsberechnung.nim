@@ -7,7 +7,7 @@ proc sameDay(date: DateTime): bool =
       month(date) == month(now()) and
       monthday(date) == monthday(now())
 
-proc weekdayCalculation(d, m, y, c: int): int =
+proc calculateWeekday(d, m, y, c: int): int =
   result = (d + int(2.6 * float(m) - 0.2) + y + int(y / 4) + int(c / 4) - 2 * c) mod 7
   if result < 0: result += 7
 
@@ -31,7 +31,7 @@ proc resultMessage(day, month, year, w: int): string =
   of 6: result &= "Samstag"
   else: result = "Es konnte kein Wochentag ermittelt werden"
 
-proc parseDate(arguments = commandLineParams()): string =
+proc parseDate*(arguments = commandLineParams()): string =
   if arguments.len != 1: return "Unpassende Anzahl an Argumenten übergeben"
 
   var values = arguments[0].split('.')
@@ -58,8 +58,9 @@ proc parseDate(arguments = commandLineParams()): string =
   let
     y = parseInt(values[2][2..3])
     c = parseInt(values[2][0..1])
-    w = weekdayCalculation(day, m, y, c)
+    w = calculateWeekday(day, m, y, c)
 
   return resultMessage(day, month, year, w)
 
-echo parseDate()
+when isMainModule:
+  echo parseDate()
