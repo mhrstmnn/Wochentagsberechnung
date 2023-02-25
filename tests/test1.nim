@@ -4,31 +4,29 @@
 import unittest, wochentagsberechnung
 
 test "Keine Argumente":
-  const result = "Unpassende Anzahl an Argumenten übergeben"
-  check main(@[]) == @[result]
+  check parseDate(@[]) == "Unpassende Anzahl an Argumenten übergeben"
 
 test "Zu viele Argumente":
   const result = "Unpassende Anzahl an Argumenten übergeben"
-  check main(@["", "", ""]) == @[result]
-  check main(@["", ""]) == @[result]
+  check parseDate(@["", "", ""]) == result
+  check parseDate(@["", ""]) == result
 
 test "Ungültiges Datum":
-  const result = "Ungültiges Datum angegeben"
-  check main(@[""]) == @[result]
+  check parseDate(@[""]) == "Ungültiges Datum angegeben"
 
 test "Ungültiger Tag":
   const result = "Ungültiger Tag angegeben"
-  check main(@["32.01.2000"]) == @[result]
-  check main(@["32.1.2000"]) == @[result]
+  check parseDate(@["32.01.2000"]) == result
+  check parseDate(@["32.1.2000"]) == result
 
 test "Ungültiger Monat":
   const result = "Ungültiger Monat angegeben"
-  check main(@["01.13.2000"]) == @[result]
-  check main(@["1.13.2000"]) == @[result]
+  check parseDate(@["01.13.2000"]) == result
+  check parseDate(@["1.13.2000"]) == result
 
 test "Ungültiges Jahr":
   const result = "Ungültiges Jahr angegeben"
-  check main(@["01.01.1000"]) == @[result]
-  check main(@["1.1.1000"]) == @[result]
-  check main(@["01.02.1000"]) == @[result]
-  check main(@["1.2.1000"]) == @[result]
+  check parseDate(@["01.01.1000"]) == result
+  check parseDate(@["1.1.1000"]) == result
+  check parseDate(@["01.02.1000"]) == result
+  check parseDate(@["1.2.1000"]) == result
