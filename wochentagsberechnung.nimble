@@ -1,6 +1,6 @@
 # Package
 
-version       = "1.0.2"
+version       = "1.0.3"
 author        = "Michael Horstmann"
 description   = "Zu einem beliebigen Datum den Wochentag ermitteln"
 license       = "MIT"
