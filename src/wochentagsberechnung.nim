@@ -2,10 +2,10 @@
 
 import std/[os, strutils, times]
 
-proc sameDay(date: DateTime): bool =
-  return year(date) == year(now()) and
-      month(date) == month(now()) and
-      monthday(date) == monthday(now())
+proc sameDay(date: DateTime, now = now()): bool =
+  return year(date) == year(now) and
+    month(date) == month(now) and
+    monthday(date) == monthday(now)
 
 proc calculateWeekday(d, m, y, c: int): int =
   result = (d + int(2.6 * float(m) - 0.2) + y + int(y / 4) + int(c / 4) - 2 * c) mod 7
